@@ -1,0 +1,20 @@
+{
+  "name": "linkedin-auto-poster",
+  "version": "1.0.0",
+  "description": "Effortlessly create engaging social media content! This tool leverages the power of Meta AI to generate trending posts tailored to your profession and industry. Save time and boost your online presence with AI-powered content creation.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jazzhunks/socialmedia-post-generator.git"
+  },
+  "author": "Mudasir Mushtaq",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Jazzhunks/socialmedia-post-generator/issues"
+  },
+  "homepage": "https://github.com/Jazzhunks/socialmedia-post-generator#readme",
+  "keywords": []
+}
