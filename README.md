@@ -87,19 +87,25 @@ This project provides a web application that uses Meta AI to generate social med
     pip install -r requirements.txt
     ```
 
-5.  **Install the JavaScript dependencies:**
+5.  **Install Flask and Meta API:**
+
+    ```bash
+    pip install Flask meta-ai-api 
+    ```
+
+6.  **Install the JavaScript dependencies:**
 
     ```bash
     npm install linkedin-auto-poster 
     ```
 
-6.  **Run the Flask application:**
+7.  **Run the Flask application:**
 
     ```bash
     python app.py
     ```
 
-7.  **Open your web browser and go to the provided address** (usually `http://127.0.0.1:5000/`) to access the application.
+8.  **Open your web browser and go to the provided address** (usually `http://127.0.0.1:5000/`) to access the application.
 
 
 ## Deploying to a Cloud Server
