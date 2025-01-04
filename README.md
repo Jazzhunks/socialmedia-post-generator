@@ -2,13 +2,6 @@
 
 This project provides a web application that uses Meta AI to generate social media posts. Users can log in, provide their job profile and industry, and generate relevant posts with a click of a button.
 
-## Features
-
-*   User login and registration
-*   Profile management (update job profile and industry)
-*   AI-powered post generation using Meta AI
-*   Clean and modern UI inspired by the Meta AI website
-*   Automated LinkedIn posting (using `linkedin-auto-poster`)
 
 ## Technologies Used
 
