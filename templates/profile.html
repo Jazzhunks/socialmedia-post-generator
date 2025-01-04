@@ -1,11 +1,177 @@
 {% extends "layout.html" %}
 {% block content %}
-  <form method="POST" action="/generate_post">
-    <button type="submit">Generate Post</button>
-  </form>
-  {% if post_content %}
-    <div class="post-card">
-      {{ post_content }}
+
+<div class="row justify-content-center">
+  
+  <div class="col-md-8">
+    <h3>Generate Social Media Post</h3>
+    <div class="card">
+      
+      <div class="card-body">
+        
+
+        {% if show_profile_form %} 
+          <div class="mt-3">
+            <h3>Update Your Profile</h3>  
+            <form method="POST" action="/update_profile"> 
+              <div class="mb-3">
+                <label for="industry" class="form-label">Industry:</label>
+                <select class="form-select" id="industry" name="industry" required>
+                  <option value="">Select Industry</option>
+                  <option value="Technology" {% if industry == "Technology" %}selected{% endif %}>Technology</option>
+                  <option value="Healthcare" {% if industry == "Healthcare" %}selected{% endif %}>Healthcare</option>
+                  <option value="Finance" {% if industry == "Finance" %}selected{% endif %}>Finance</option>
+                  <option value="Education" {% if industry == "Education" %}selected{% endif %}>Education</option>
+                  <option value="Marketing" {% if industry == "Marketing" %}selected{% endif %}>Marketing</option>
+                </select>
+              </div>
+              <div class="mb-3">
+                <label for="job_profile" class="form-label">Job Profile:</label>
+                <select class="form-select" id="job_profile" name="job_profile" required>
+                  <option value="">Select Job Profile</option>
+                </select>
+              </div>
+              <button type="submit" class="btn btn-primary">Save Changes</button> 
+            </form>
+          </div>
+        {% endif %} 
+
+        <div class="mt-4"> 
+          
+
+          {% if post_content %} 
+            <div class="post-card mb-3"> 
+              {{ post_content }}
+            </div>
+          {% else %}
+            <div class="post-card mb-3">
+              <p>Click the "Generate Post" button below to create a captivating social media post tailored to your industry and profession.</p>
+              <p>This tool leverages the power of AI to generate trending content that will engage your audience and boost your online presence.</p>
+            </div>
+          {% endif %}
+
+          <form method="POST" action="/generate_post" id="generate-post-form">
+            <button type="submit" class="btn btn-primary mb-3" id="generate-post-button">Generate Post</button> 
+            <div id="loader" class="spinner-border text-primary d-none" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
-  {% endif %}
+  </div>
+</div>
+<script>
+
+const form = document.getElementById('generate-post-form');
+  const loader = document.getElementById('loader');
+  const button = document.getElementById('generate-post-button'); 
+
+  form.addEventListener('submit', function() {
+    loader.classList.remove('d-none');
+    button.classList.add('d-none'); 
+  });
+
+  const industrySelect = document.getElementById('industry');
+  const jobProfileSelect = document.getElementById('job_profile');
+
+function updateJobProfiles() {
+  const selectedIndustry = industrySelect.value;
+  let jobProfiles = [];
+
+  switch (selectedIndustry) {
+    case 'Technology':
+      jobProfiles = [
+        "Software Engineer",
+        "Data Scientist",
+        "Web Developer",
+        "Network Engineer",
+        "Cybersecurity Analyst",
+        "IT Project Manager",
+        "Database Administrator",
+        "Cloud Computing Engineer",
+        "AI/Machine Learning Engineer",
+        "UX/UI Designer"
+      ];
+      break;
+    case 'Healthcare':
+      jobProfiles = [
+        "Doctor",
+        "Nurse",
+        "Pharmacist",
+        "Medical Assistant",
+        "Physical Therapist",
+        "Occupational Therapist",
+        "Healthcare Administrator",
+        "Medical Researcher",
+        "Mental Health Counselor",
+        "Dental Hygienist"
+      ];
+      break;
+    case 'Finance':
+      jobProfiles = [
+        "Financial Analyst",
+        "Accountant",
+        "Investment Banker",
+        "Financial Advisor",
+        "Budget Analyst",
+        "Credit Analyst",
+        "Insurance Agent",
+        "Loan Officer",
+        "Tax Preparer",
+        "Actuary"
+      ];
+      break;
+    case 'Education':
+      jobProfiles = [
+        "Teacher",
+        "Professor",
+        "School Counselor",
+        "Librarian",
+        "Principal",
+        "Special Education Teacher",
+        "Curriculum Developer",
+        "Educational Administrator",
+        "School Psychologist",
+        "Instructional Designer"
+      ];
+      break;
+    case 'Marketing':
+      jobProfiles = [
+        "Marketing Manager",
+        "Social Media Manager",
+        "Content Writer",
+        "SEO Specialist",
+        "Digital Marketing Specialist",
+        "Market Research Analyst",
+        "Public Relations Specialist",
+        "Advertising Manager",
+        "Brand Manager",
+        "Marketing Coordinator"
+      ];
+      break;
+    // Add more industries and job profiles as needed
+    default:
+      jobProfiles = [];
+  }
+
+  jobProfileSelect.innerHTML = '<option value="">Select Job Profile</option>';
+  jobProfiles.forEach(profile => {
+    const option = document.createElement('option');
+    option.value = profile;
+    option.text = profile;
+    // Pre-select the job profile if it matches the user's current profile
+    if (profile === '{{ job_profile }}') { 
+      option.selected = true;
+    }
+    jobProfileSelect.add(option);
+  });
+}
+
+industrySelect.addEventListener('change', updateJobProfiles);
+
+// Trigger the function initially to populate job profiles based on the selected industry
+updateJobProfiles();
+</script>
+
 {% endblock %}

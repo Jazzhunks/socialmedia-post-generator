@@ -1,11 +1,143 @@
 {% extends "layout.html" %}
 {% block content %}
-  <h2>Register</h2>
-  <form method="POST">
-    <input type="text" name="username" placeholder="Username" required>
-    <input type="password" name="password" placeholder="Password" required>
-    <input type="text" name="job_profile" placeholder="Job Profile" required>
-    <input type="text" name="industry" placeholder="Industry" required>
-    <button type="submit">Register</button>
-  </form>
+<div class="row justify-content-center">
+  <div class="col-md-6"> 
+    <div class="card">
+      <div class="card-body">
+        <h2 class="card-title">Register</h2>
+        <form method="POST">
+          <div class="mb-3">
+            <label for="username" class="form-label">Username:</label>
+            <input type="text" class="form-control" id="username" name="username" placeholder="Username" required>
+          </div>
+          <div class="mb-3">
+            <label for="password" class="form-label">Password:</label>
+            <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+          </div>
+          <div class="mb-3">
+            <label for="industry" class="form-label">Industry:</label>
+            <select class="form-select" id="industry" name="industry" required>
+              <option value="">Select Industry</option>
+              <option value="Technology">Technology</option>
+              <option value="Healthcare">Healthcare</option>
+              <option value="Finance">Finance</option>
+              <option value="Education">Education</option>
+              <option value="Marketing">Marketing</option>
+              </select>
+          </div>
+          <div class="mb-3">
+            <label for="job_profile" class="form-label">Job Profile:</label>
+            <select class="form-select" id="job_profile" name="job_profile" required>
+              <option value="">Select Job Profile</option>
+              </select>
+          </div>
+          <button type="submit" class="btn btn-primary">Register</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const industrySelect = document.getElementById('industry');
+const jobProfileSelect = document.getElementById('job_profile');
+
+function updateJobProfiles() {
+  const selectedIndustry = industrySelect.value;
+  let jobProfiles = [];
+
+  switch (selectedIndustry) {
+    case 'Technology':
+      jobProfiles = [
+        "Software Engineer",
+        "Data Scientist",
+        "Web Developer",
+        "Network Engineer",
+        "Cybersecurity Analyst",
+        "IT Project Manager",
+        "Database Administrator",
+        "Cloud Computing Engineer",
+        "AI/Machine Learning Engineer",
+        "UX/UI Designer"
+      ];
+      break;
+    case 'Healthcare':
+      jobProfiles = [
+        "Doctor",
+        "Nurse",
+        "Pharmacist",
+        "Medical Assistant",
+        "Physical Therapist",
+        "Occupational Therapist",
+        "Healthcare Administrator",
+        "Medical Researcher",
+        "Mental Health Counselor",
+        "Dental Hygienist"
+      ];
+      break;
+    case 'Finance':
+      jobProfiles = [
+        "Financial Analyst",
+        "Accountant",
+        "Investment Banker",
+        "Financial Advisor",
+        "Budget Analyst",
+        "Credit Analyst",
+        "Insurance Agent",
+        "Loan Officer",
+        "Tax Preparer",
+        "Actuary"
+      ];
+      break;
+    case 'Education':
+      jobProfiles = [
+        "Teacher",
+        "Professor",
+        "School Counselor",
+        "Librarian",
+        "Principal",
+        "Special Education Teacher",
+        "Curriculum Developer",
+        "Educational Administrator",
+        "School Psychologist",
+        "Instructional Designer"
+      ];
+      break;
+    case 'Marketing':
+      jobProfiles = [
+        "Marketing Manager",
+        "Social Media Manager",
+        "Content Writer",
+        "SEO Specialist",
+        "Digital Marketing Specialist",
+        "Market Research Analyst",
+        "Public Relations Specialist",
+        "Advertising Manager",
+        "Brand Manager",
+        "Marketing Coordinator"
+      ];
+      break;
+    // Add more industries and job profiles as needed
+    default:
+      jobProfiles = [];
+  }
+
+  jobProfileSelect.innerHTML = '<option value="">Select Job Profile</option>';
+  jobProfiles.forEach(profile => {
+    const option = document.createElement('option');
+    option.value = profile;
+    option.text = profile;
+    // Pre-select the job profile if it matches the user's current profile
+    if (profile === '{{ job_profile }}') { 
+      option.selected = true;
+    }
+    jobProfileSelect.add(option);
+  });
+}
+
+industrySelect.addEventListener('change', updateJobProfiles);
+
+// Trigger the function initially to populate job profiles based on the selected industry
+updateJobProfiles();
+</script>
 {% endblock %}
