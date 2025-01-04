@@ -1,0 +1,11 @@
+{% extends "layout.html" %}
+{% block content %}
+  <form method="POST" action="/generate_post">
+    <button type="submit">Generate Post</button>
+  </form>
+  {% if post_content %}
+    <div class="post-card">
+      {{ post_content }}
+    </div>
+  {% endif %}
+{% endblock %}
