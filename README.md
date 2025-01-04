@@ -65,7 +65,7 @@ This project provides a web application that uses Meta AI to generate social med
 1.  **Clone the repository:**
 
     ```bash
-    git clone [https://github.com/Jazzhunks/socialmedia-post-generator.git](https://github.com/Jazzhunks/socialmedia-post-generator.git)
+    git clone https://github.com/Jazzhunks/socialmedia-post-generator.git
     ```
 
 2.  **Navigate to the project directory:**
