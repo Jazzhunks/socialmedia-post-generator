@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Meta AI Social Post Generator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="sidebar">
+    {% if "username" in session %}
+      <h2>Welcome, {{ username }}!</h2>
+      <ul>
+        <li><a href="/profile">Generate</a></li>
+        <li><a href="/logout">Logout</a></li>
+      </ul>
+    {% else %}
+      <h2>Meta AI Social Post Generator</h2>
+      <ul>
+        <li><a href="/">Login</a></li>
+        <li><a href="/register">Register</a></li>
+      </ul>
+    {% endif %}
+  </div>
+
+  <div class="main-content">
+    {% block content %}
+    {% endblock %}
+  </div>
+</body>
+</html>
